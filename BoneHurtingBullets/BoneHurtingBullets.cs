@@ -34,7 +34,7 @@ namespace BoneHurtingBullets
             player.Life.OnHurt += OnHurt;
             
         }
-        }
+        
         private void OnPlayerDisconnected(UnturnedPlayer player)
         {
             player.Life.OnHurt -= OnHurt;
