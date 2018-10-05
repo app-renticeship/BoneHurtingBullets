@@ -16,15 +16,31 @@ namespace BoneHurtingBullets
         protected override void Load()
         {
             Rocket.Core.Logging.Logger.Log("BoneBreakingBullets Loaded, Chances:\n" + String.Join("\n", Configuration.Instance.boneBreakingChances.Select(x => $"{x.Limb}: {x.BreakChance}%").ToArray()));
-            DamageTool.playerDamaged += OnPlayerDamage;
+           // DamageTool.playerDamaged += OnPlayerDamage;
+           // damagetool doesn't work iv'e tried in diff proj
+            U.Events.OnPlayerConnected += OnPlayerConnected;
+             U.Events.OnPlayerConnected += OnPlayerDisconnected;
         }
 
         protected override void Unload()
         {
             DamageTool.playerDamaged -= OnPlayerDamage;
+            U.Events.OnPlayerConnected -= OnPlayerConnected;
+            U.Events.OnPlayerConnected += OnPlayerDisconnected;
         }
-
-        private void OnPlayerDamage(Player player, ref EDeathCause cause, ref ELimb limb, ref CSteamID killer, ref Vector3 direction, ref float damage, ref float times, ref bool canDamage)
+        /* Using new event */
+        private void OnPlayerConnected(UnturnedPlayer player)
+        {
+            player.Life.OnHurt += OnHurt;
+            
+        }
+        }
+        private void OnPlayerDisconnected(UnturnedPlayer player)
+        {
+            player.Life.OnHurt -= OnHurt;
+            
+        }
+        private void OnHurt(Player player, byte damage, Vector3 force, EDeathCause cause, ELimb limb, CSteamID killer)
         {
             if (cause != EDeathCause.GUN || cause != EDeathCause.PUNCH || cause != EDeathCause.MELEE)
                 return;
