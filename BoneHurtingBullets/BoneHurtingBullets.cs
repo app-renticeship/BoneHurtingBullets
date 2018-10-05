@@ -26,7 +26,7 @@ namespace BoneHurtingBullets
         {
             DamageTool.playerDamaged -= OnPlayerDamage;
             U.Events.OnPlayerConnected -= OnPlayerConnected;
-            U.Events.OnPlayerConnected += OnPlayerDisconnected;
+            U.Events.OnPlayerConnected -= OnPlayerDisconnected;
         }
         /* Using new event */
         private void OnPlayerConnected(UnturnedPlayer player)
