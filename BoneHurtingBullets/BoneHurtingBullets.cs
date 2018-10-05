@@ -19,14 +19,14 @@ namespace BoneHurtingBullets
            // DamageTool.playerDamaged += OnPlayerDamage;
            // damagetool doesn't work iv'e tried in diff proj
             U.Events.OnPlayerConnected += OnPlayerConnected;
-             U.Events.OnPlayerConnected += OnPlayerDisconnected;
+             U.Events.OnPlayerDisconnected += OnPlayerDisconnected;
         }
 
         protected override void Unload()
         {
             DamageTool.playerDamaged -= OnPlayerDamage;
             U.Events.OnPlayerConnected -= OnPlayerConnected;
-            U.Events.OnPlayerConnected -= OnPlayerDisconnected;
+            U.Events.OnPlayerDisconnected -= OnPlayerDisconnected;
         }
         /* Using new event */
         private void OnPlayerConnected(UnturnedPlayer player)
