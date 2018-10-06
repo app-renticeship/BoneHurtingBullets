@@ -5,7 +5,6 @@ using System;
 using Rocket.Unturned.Player;
 using System.Linq;
 using UnityEngine;
-using Logger = Rocket.Core.Logging.Logger;
 using Rocket.Unturned;
 
 
